@@ -1,0 +1,42 @@
+# Stock Portfolio Tracker 
+
+# Sample static stock price data (mock data)
+stock_prices = {
+    "AAPL": 180.25,
+    "GOOGL": 2750.50,
+    "MSFT": 320.60,
+    "TSLA": 240.30,
+    "AMZN": 3500.75
+}
+
+portfolio = {}
+total_value = 0.0
+
+print("📊 Simple Stock Portfolio Tracker")
+print("---------------------------------")
+
+# Get number of stocks in portfolio
+n = int(input("How many different stocks do you own? "))
+
+# Get stock info
+for i in range(n):
+    symbol = input(f"\nEnter stock symbol #{i+1} (e.g., AAPL): ").upper()
+    qty = int(input(f"Enter quantity of {symbol}: "))
+    
+    if symbol in stock_prices:
+        price = stock_prices[symbol]
+        value = price * qty
+        portfolio[symbol] = {"quantity": qty, "price": price, "value": value}
+        total_value += value
+    else:
+        print("⚠️ Warning: Price for", symbol, "not found (using $0).")
+        portfolio[symbol] = {"quantity": qty, "price": 0, "value": 0}
+
+# Display portfolio summary
+print("\n📈 Portfolio Summary:")
+print("---------------------------------")
+for symbol, data in portfolio.items():
+    print(f"{symbol} - Qty: {data['quantity']}, Price: ${data['price']}, Value: ${data['value']:.2f}")
+
+print("---------------------------------")
+print(f"💰 Total Portfolio Value: ${total_value:.2f}")
